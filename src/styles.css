@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+
+:root {
+  color-scheme: dark;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #020705;
+  color: #f7f0dd;
+  --gold: #d7b56d;
+  --green: #006039;
+  --emerald: #00d084;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+
+.launch {
+  position: relative;
+  min-height: 100vh;
+  padding: 28px clamp(18px, 4vw, 72px) 42px;
+  background:
+    radial-gradient(circle at var(--mx) var(--my), rgba(215, 181, 109, .28), transparent 24rem),
+    radial-gradient(circle at 12% 10%, rgba(0, 208, 132, .23), transparent 24rem),
+    linear-gradient(135deg, #010302 0%, #06100b 38%, #160f05 100%);
+  isolation: isolate;
+}
+
+.launch::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 62px 62px;
+  mask-image: radial-gradient(circle at center, black, transparent 75%);
+  z-index: -2;
+}
+
+.ambient { position: fixed; border-radius: 999px; filter: blur(18px); opacity: .5; z-index: -1; }
+.ambient-one { width: 30vw; height: 30vw; right: -8vw; top: 7vh; background: rgba(0, 112, 67, .55); }
+.ambient-two { width: 22vw; height: 22vw; left: 7vw; bottom: 6vh; background: rgba(215, 181, 109, .35); }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  background: rgba(2, 12, 8, .55);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 80px rgba(0,0,0,.28);
+}
+
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 900; letter-spacing: .22em; text-transform: uppercase; }
+.crown { color: var(--gold); font-size: 1.15rem; }
+.nav-links { display: flex; gap: clamp(12px, 3vw, 34px); color: rgba(247, 240, 221, .75); font-size: .92rem; }
+.nav-links a:hover { color: white; }
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(360px, 1.08fr);
+  align-items: center;
+  gap: clamp(28px, 6vw, 92px);
+  min-height: calc(100vh - 130px);
+  padding: clamp(42px, 8vw, 94px) 0 32px;
+}
+
+.hero-copy { transform: translateY(18px); opacity: 0; transition: .9s ease; }
+.is-loaded .hero-copy { transform: translateY(0); opacity: 1; }
+.eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: .28em; font-size: .78rem; font-weight: 800; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { font-size: clamp(4rem, 11vw, 11.4rem); line-height: .78; margin-bottom: 28px; letter-spacing: -.085em; text-shadow: 0 30px 90px rgba(0,0,0,.75); }
+.lead { max-width: 720px; color: rgba(247, 240, 221, .78); font-size: clamp(1.05rem, 2vw, 1.35rem); line-height: 1.65; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+.button { padding: 15px 22px; border-radius: 999px; font-weight: 800; transition: .25s ease; }
+.primary { color: #021008; background: linear-gradient(135deg, #f7e6aa, var(--gold)); box-shadow: 0 18px 50px rgba(215, 181, 109, .32); }
+.ghost { border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); }
+.button:hover { transform: translateY(-3px); }
+
+.stage {
+  position: relative;
+  min-height: clamp(520px, 64vw, 790px);
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+.halo, .orbit { position: absolute; inset: 12%; border-radius: 50%; transform-style: preserve-3d; }
+.halo { background: radial-gradient(circle, rgba(215,181,109,.45), transparent 58%); filter: blur(3px); transform: rotateX(72deg) translateZ(-80px); }
+.orbit { border: 1px solid rgba(215,181,109,.35); box-shadow: inset 0 0 50px rgba(0,208,132,.08); }
+.orbit-one { transform: rotateX(68deg) rotateZ(-24deg) translateZ(-40px); animation: spin 19s linear infinite; }
+.orbit-two { inset: 22%; transform: rotateX(74deg) rotateZ(34deg) translateZ(40px); animation: spin 13s linear infinite reverse; }
+
+.card-3d {
+  position: absolute;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 34px;
+  overflow: hidden;
+  background: rgba(255,255,255,.08);
+  box-shadow: 0 35px 90px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.23);
+  transform-style: preserve-3d;
+  transition: transform .2s ease;
+}
+.card-3d img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.05) contrast(1.08); }
+.watch-card { width: min(58vw, 560px); height: min(43vw, 425px); left: 2%; top: 16%; transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(95px) rotateZ(-7deg); }
+.athlete-card { width: min(34vw, 310px); height: min(47vw, 430px); right: 5%; top: 5%; transform: rotateX(calc(var(--rx) * .7)) rotateY(calc(var(--ry) * .7)) translateZ(160px) rotateZ(8deg); }
+.shine { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,.34), transparent 46%); mix-blend-mode: screen; transform: translateX(-40%); animation: sweep 3.8s ease-in-out infinite; }
+.nameplate { position: absolute; left: 18px; right: 18px; bottom: 18px; padding: 14px; border-radius: 20px; text-align: center; font-weight: 900; background: rgba(0,0,0,.44); backdrop-filter: blur(12px); }
+.glass-plinth { position: absolute; left: 18%; right: 12%; bottom: 10%; height: 96px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.03)); border: 1px solid rgba(255,255,255,.18); transform: rotateX(74deg) translateZ(-15px); box-shadow: 0 28px 80px rgba(0,0,0,.7); color: rgba(247, 240, 221, .74); text-transform: uppercase; letter-spacing: .25em; font-size: .78rem; }
+
+.metrics, .experience { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 24px 0; }
+.metric, .panel, .feature-card { border: 1px solid rgba(255,255,255,.13); border-radius: 28px; background: linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.035)); box-shadow: 0 24px 70px rgba(0,0,0,.32); backdrop-filter: blur(18px); }
+.metric { padding: 24px; }
+.metric strong { display: block; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1; color: var(--gold); }
+.metric span { color: rgba(247,240,221,.72); }
+.panel { padding: clamp(24px, 5vw, 46px); }
+.story { display: grid; grid-template-columns: .9fr 1.1fr; gap: 36px; align-items: end; margin-top: 42px; }
+.story h2 { font-size: clamp(2.2rem, 5vw, 4.9rem); line-height: .95; letter-spacing: -.06em; margin-bottom: 0; }
+.story p, .feature-card p, .credits p { color: rgba(247,240,221,.75); line-height: 1.7; }
+.experience { grid-template-columns: 1.25fr .85fr .85fr; margin-top: 18px; }
+.feature-card { padding: 28px; min-height: 280px; overflow: hidden; }
+.feature-card.large { position: relative; min-height: 390px; padding: 0; }
+.feature-card.large img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.78) saturate(1.12); }
+.feature-card.large div { position: absolute; inset: auto 24px 24px; padding: 22px; border-radius: 22px; background: rgba(0,0,0,.46); backdrop-filter: blur(16px); }
+.feature-card span { color: var(--gold); text-transform: uppercase; letter-spacing: .16em; font-weight: 800; font-size: .75rem; }
+.icon { display: inline-grid; place-items: center; width: 56px; height: 56px; border: 1px solid rgba(215,181,109,.42); border-radius: 18px; margin-bottom: 34px; font-size: 1.5rem !important; background: rgba(215,181,109,.12); }
+.credits { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; font-size: .9rem; }
+
+@keyframes spin { to { rotate: 360deg; } }
+@keyframes sweep { 50%, 100% { transform: translateX(90%); } }
+
+@media (max-width: 980px) {
+  .hero, .story, .experience, .credits { grid-template-columns: 1fr; }
+  .stage { min-height: 620px; }
+  .watch-card { width: 78vw; height: 56vw; left: 0; }
+  .athlete-card { width: 42vw; height: 58vw; right: 0; }
+}
+
+@media (max-width: 680px) {
+  .topbar { align-items: flex-start; border-radius: 26px; flex-direction: column; }
+  .nav-links { width: 100%; justify-content: space-between; }
+  .metrics { grid-template-columns: 1fr; }
+  .stage { min-height: 520px; }
+  .watch-card { width: 88vw; height: 64vw; }
+  .athlete-card { width: 56vw; height: 76vw; top: 33%; }
+}
